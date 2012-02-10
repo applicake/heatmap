@@ -11,12 +11,6 @@ app.configure(function(){
   app.use(express.errorHandler({dumpExceptions: true, showStack: true}));
 });
 
-var options = {
-  host: 'www.applicake.com',
-  port: 80,
-  path: '/'
-}
-
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
@@ -25,7 +19,7 @@ app.get('/heatmap-client', function (req, res) {
   res.sendfile(__dirname + '/heatmap-client.js');
 });
 
-app.listen(8080);
+app.listen(process.env.PORT || 3000);
 
 io.sockets.on('connection', function (socket) {
   socket.on('click', function (data) {
