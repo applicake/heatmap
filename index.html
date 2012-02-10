@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="heatmap.js"></script>
+    <style>
+      body {
+        margin: 0px;
+      }
+      iframe {
+        border: 0px;
+      }
+      canvas {
+        position: absolute;
+        top: 0px;
+        left: 385px;
+      }
+
+    </style>
+    <script type="text/javascript">
+      HEATMAP.Server.init();
+    </script>
+  </head>
+  <body>
+     <iframe id="heatmap-iframe" src="http://localhost:3000" width="100%"></iframe>
+     <canvas id="canvas"></canvas>
+  </body>
+</html>
+
+
