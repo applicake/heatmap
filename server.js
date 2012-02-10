@@ -11,8 +11,14 @@ app.configure(function(){
   app.use(express.errorHandler({dumpExceptions: true, showStack: true}));
 });
 
+io.configure(function(){
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
+
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  //res.sendfile(__dirname + '/index.html');
+  res.render('index.jade', {client: ''})
 });
 
 app.get('/heatmap-client', function (req, res) {
