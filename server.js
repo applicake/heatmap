@@ -19,7 +19,10 @@ app.get('/heatmap-client', function (req, res) {
   res.sendfile(__dirname + '/heatmap-client.js');
 });
 
-app.listen(process.env.PORT || 3000);
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
+  console.log('Listening on ' + port);
+});
 
 io.sockets.on('connection', function (socket) {
   socket.on('click', function (data) {
