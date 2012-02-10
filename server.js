@@ -17,8 +17,8 @@ io.configure(function(){
 });
 
 app.get('/', function (req, res) {
-  //res.sendfile(__dirname + '/index.html');
-  res.render('index.jade', {client: ''})
+  res.sendfile(__dirname + '/index.html');
+  //res.render('index.jade', {client: ''})
 });
 
 app.get('/heatmap-client', function (req, res) {
