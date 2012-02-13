@@ -8,6 +8,7 @@ HEATMAP.Server = new function() {
   var RADIUS = 20;
   var INTENSITY = 0.2;
 
+  //Util function - creates tiny linear gradient line
   function createColourGradient() {
     var ctx = document.createElement('canvas').getContext('2d');
     var grd = ctx.createLinearGradient(0, 0, 256, 0);
@@ -39,6 +40,7 @@ HEATMAP.Server = new function() {
     }
   }
 
+  //Create black point with alpha
   function drawBlackPoint(x, y) {
     if (x > 0) {
       setExtremes(x + RADIUS, y + RADIUS);
@@ -51,6 +53,7 @@ HEATMAP.Server = new function() {
     }
   }
 
+  //Putting some colors on canvas.
   function heatMapOverlay(x_min, x_max, y_min, y_max) {
     var ctx = document.getElementById('canvas').getContext('2d');
     var imageData = ctx.getImageData(

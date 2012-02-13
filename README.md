@@ -11,7 +11,8 @@ Requirements:
 <script src="http://YOUR_NODE_JS_SERVER/heatmap-client"></script>
 ```
 
-Port is mandatory, even if it's 80
+Port is mandatory, even if it's 80.
+
 Canvas dimensions limiting the size of heatmap (it's automatically
 centered and aligned to the top)
 
