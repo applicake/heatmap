@@ -25,7 +25,7 @@ app.get('/heatmap-client', function (req, res) {
   res.sendfile(__dirname + '/heatmap-client.js');
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 app.listen(port, function(){
   console.log('Listening on ' + port);
 });

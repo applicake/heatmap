@@ -76,11 +76,12 @@ HEATMAP.Server = new function() {
     window.addEventListener('load', function(){
       var socket = io.connect();
       socket.on('paint', function(data){
-        console.log('PAINT');
         drawBlackPoint(data.x, data.y);
         heatMapOverlay(x_min, x_max, y_min, y_max);
       });
       socket.on('canvas', function(data){
+        document.getElementById('canvas').style.left = "" +
+          Math.floor((document.body.clientWidth - 900) / 2) + "px";
         document.getElementById('canvas').width = data.width;
         document.getElementById('canvas').height = data.height;
         document.getElementById('heatmap-iframe').height = data.height;
