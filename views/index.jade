@@ -1,0 +1,21 @@
+html
+  head
+    script(src='/socket.io/socket.io.js')
+    script(src='heatmap.js')
+    style
+      body {
+      margin: 0px;
+      }
+      iframe {
+      border: 0px;
+      }
+      canvas {
+      position: absolute;
+      top: 0px;
+      left: 385px;
+      }
+    script(type='text/javascript')
+      HEATMAP.Server.init();
+  body
+    iframe#heatmap-iframe(src=client_server, width='100%')
+    canvas#canvas

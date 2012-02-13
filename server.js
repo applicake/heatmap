@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express.createServer()
 , io = require('socket.io').listen(app)
-, http = require('http')
+, http = require('http');
 
 app.configure(function(){
   app.use(express.methodOverride());
@@ -15,10 +15,13 @@ io.configure(function(){
   io.set("transports", ["xhr-polling"]);
   io.set("polling duration", 10);
 });
-
+app.set ('view engine', 'jade');
+app.set('view options', {
+  layout: false
+});
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-  //res.render('index.jade', {client: ''})
+  var server = process.env.HEATMAP_CLIENT || 'http://localhost:3000'
+  res.render('index' , { client_server: server});
 });
 
 app.get('/heatmap-client', function (req, res) {
