@@ -47,51 +47,51 @@ HEATMAP.Server = new function() {
       var ctx = document.getElementById('canvas').getContext('2d');
       var grd = ctx.createRadialGradient(x, y, 0, x, y, RADIUS);
       grd.addColorStop(0.0, 'rgba(0, 0, 0, ' + INTENSITY  + ')');
-          grd.addColorStop(1.0, 'transparent');
-          ctx.fillStyle = grd;
-          ctx.fillRect(x - RADIUS, y - RADIUS, RADIUS*2, RADIUS*2);
-          }
-          }
+      grd.addColorStop(1.0, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.fillRect(x - RADIUS, y - RADIUS, RADIUS*2, RADIUS*2);
+    }
+  }
 
-          //Putting some colors on canvas.
-          function heatMapOverlay(x_min, x_max, y_min, y_max) {
-            var ctx = document.getElementById('canvas').getContext('2d');
-            var imageData = ctx.getImageData(
-              x_min,
-              y_min,
-              x_max - x_min,
-              y_max - y_min);
-            var data = imageData.data;
-            var colorGradient = createColourGradient();
+  //Putting some colors on canvas.
+  function heatMapOverlay(x_min, x_max, y_min, y_max) {
+    var ctx = document.getElementById('canvas').getContext('2d');
+    var imageData = ctx.getImageData(
+      x_min,
+      y_min,
+      x_max - x_min,
+      y_max - y_min);
+    var data = imageData.data;
+    var colorGradient = createColourGradient();
 
-            for (var i = 0; i < data.length; i += 4) {
-              var a = data[i + 3] * 4;
-              data[i] = colorGradient[a];
-              data[i + 1] = colorGradient[a + 1];
-              data[i + 2] = colorGradient[a + 2];
-            }
+    for (var i = 0; i < data.length; i += 4) {
+      var a = data[i + 3] * 4;
+      data[i] = colorGradient[a];
+      data[i + 1] = colorGradient[a + 1];
+      data[i + 2] = colorGradient[a + 2];
+    }
 
-            ctx.putImageData(imageData, x_min, y_min);
-            ctx.fillRect(x_min, y_min, x_max - x_min, y_max - y_min);
-          }
+    ctx.putImageData(imageData, x_min, y_min);
+    ctx.fillRect(x_min, y_min, x_max - x_min, y_max - y_min);
+  }
 
-          this.init = function(){
-            window.addEventListener('load', function(){
-              var socket = io.connect();
-              socket.on('paint', function(data){
-                drawBlackPoint(data.x, data.y);
-                heatMapOverlay(x_min, x_max, y_min, y_max);
-              });
-              socket.on('canvas', function(data){
-                var canvas = document.getElementById('canvas')
-                if (canvas.width != data.width && canvas.height != data.height) {
-                  canvas.style.left = "" +
-                  Math.floor((document.body.clientWidth - 900) / 2) + "px";
-                  canvas.width = data.width;
-                  canvas.height = data.height;
-                }
-              document.getElementById('heatmap-iframe').height = data.height;
-              });
-            });
-          }
+  this.init = function(){
+    window.addEventListener('load', function(){
+      var socket = io.connect();
+      socket.on('paint', function(data){
+        drawBlackPoint(data.x, data.y);
+        heatMapOverlay(x_min, x_max, y_min, y_max);
+      });
+      socket.on('canvas', function(data){
+        var canvas = document.getElementById('canvas')
+        if (canvas.width != data.width && canvas.height != data.height) {
+          canvas.style.left = "" +
+            Math.floor((document.body.clientWidth - 900) / 2) + "px";
+          canvas.width = data.width;
+          canvas.height = data.height;
+        }
+        document.getElementById('heatmap-iframe').height = data.height;
+      });
+    });
+  }
 };
