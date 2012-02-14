@@ -8,7 +8,7 @@ HEATMAP.Client = new function() {
       });
       document.body.onmousedown =  function(event){
         socket.emit('click', {
-          x: event.x - Math.floor((document.body.clientWidth-900)/2),
+          x: event.x - Math.floor((document.body.clientWidth-width)/2),
           y: event.y + document.body.scrollTop
         });
       }
